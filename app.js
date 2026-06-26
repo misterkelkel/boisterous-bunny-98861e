@@ -142,7 +142,14 @@ const I18N = {
     footer_facebook: "Facebook Portal",
     footer_back_top: "Back to Top",
     footer_copyright: "© 2026 World Xiao Clan Guild Association. Traced back to 257 BC. All rights reserved.",
-    footer_motto: "绳其祖武 · 奕代昌荣"
+    footer_motto: "绳其祖武 · 奕代昌荣",
+    footer_instagram: "Instagram (@x.s.seow)",
+
+    // Chatbot
+    bot_title: "Xiao Clan Assistant",
+    bot_status: "Online (Automated)",
+    bot_input_placeholder: "Type a message...",
+    bot_welcome: "Hello! Welcome to the Xiao Clan Portal. I am your virtual assistant. How can I help you today?"
   },
   zh: {
     // Navigation
@@ -277,7 +284,14 @@ const I18N = {
     footer_facebook: "官方脸书 Portal",
     footer_back_top: "回到顶部",
     footer_copyright: "© 2026 世界萧氏宗亲总会. 溯源至公元前257年. 版权所有.",
-    footer_motto: "绳其祖武 · 奕代昌荣"
+    footer_motto: "绳其祖武 · 奕代昌荣",
+    footer_instagram: "Instagram 账号 (@x.s.seow)",
+
+    // Chatbot
+    bot_title: "萧氏智能小助手",
+    bot_status: "在线 (自动答复)",
+    bot_input_placeholder: "输入您的问题...",
+    bot_welcome: "您好！欢迎来到世界萧氏宗亲会门户。我是您的虚拟助手，今天有什么我可以帮您的吗？"
   }
 };
 
@@ -446,38 +460,32 @@ const CLAN_EVENTS = [
   }
 ];
 
+// Web3Forms Public Access Key Config
+const WEB3FORMS_ACCESS_KEY = "b0d1582e-dae1-427d-afbb-69a0c18c1b1a"; // Replace with your Web3Forms access key from https://web3forms.com
+
 // App State Management
-let currentStep = 1;
 let currentView = "home";
 let registeredMember = null;
 
 // Initial Setup on DOM Load
 document.addEventListener("DOMContentLoaded", () => {
-  initDatabase();
   initRouter();
   initLanguageSwitcher();
   translateDOM();
   updatePoemDisplay();
-  renderEvents();
-  renderDatabaseGrid();
-  updateDatabaseStats();
 });
 
 /* ==========================================================================
    1. LANGUAGE SWITCHING ENGINE
    ========================================================================== */
 function initLanguageSwitcher() {
-  // Create Language Swifter floating panel or attach into header
   const header = document.querySelector('header.app-header');
-  const nav = document.getElementById('navLinks');
-  
   const switcherDiv = document.createElement('div');
   switcherDiv.className = 'lang-switcher-container';
   switcherDiv.innerHTML = `
     <button class="btn-lang ${currentLang === 'en' ? 'active' : ''}" onclick="toggleLanguage('en')">EN</button>
     <button class="btn-lang ${currentLang === 'zh' ? 'active' : ''}" onclick="toggleLanguage('zh')">中文</button>
   `;
-  
   header.appendChild(switcherDiv);
 }
 
@@ -485,19 +493,12 @@ window.toggleLanguage = function(lang) {
   if (lang === currentLang) return;
   currentLang = lang;
   
-  // Update switcher buttons UI state
   document.querySelectorAll('.btn-lang').forEach(btn => {
     btn.classList.toggle('active');
   });
   
-  // Re-translate static DOM strings
   translateDOM();
-  
-  // Re-render dynamic elements
   updatePoemDisplay();
-  renderEvents();
-  renderDatabaseGrid();
-  updateDatabaseStats();
   
   if (registeredMember) {
     const currentDate = new Date(registeredMember.joinDate);
@@ -509,11 +510,9 @@ window.toggleLanguage = function(lang) {
 function translateDOM() {
   const dictionary = I18N[currentLang];
   
-  // Look up all elements with data-i18n attributes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dictionary[key]) {
-      // Swop innerHTML or value depending on tag type
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         el.placeholder = dictionary[key];
       } else {
@@ -522,7 +521,6 @@ function translateDOM() {
     }
   });
 
-  // Specifically translate placeholders in selectors
   const countrySelector = document.getElementById("inputCountry");
   if (countrySelector && countrySelector.firstElementChild) {
     countrySelector.firstElementChild.innerText = dictionary.placeholder_select_country;
@@ -533,18 +531,16 @@ function translateDOM() {
    2. VIEW ROUTER
    ========================================================================== */
 function initRouter() {
-  // Catch link clicks in Header & Footer
   document.querySelectorAll("header.app-header nav a, footer.app-footer ul a").forEach(link => {
     link.addEventListener("click", (e) => {
       const target = link.getAttribute("data-target") || link.getAttribute("href").replace("#", "");
-      if (["home", "history", "generation", "join", "database"].includes(target)) {
+      if (["home", "history", "generation", "join"].includes(target)) {
         e.preventDefault();
         navigateToView(target);
       }
     });
   });
 
-  // Handle logo click specifically
   const logoLink = document.getElementById("logoLink");
   if (logoLink) {
     logoLink.addEventListener("click", (e) => {
@@ -553,17 +549,15 @@ function initRouter() {
     });
   }
 
-  // Handle browser back/forward buttons using hash
   window.addEventListener("hashchange", () => {
     const hash = window.location.hash.replace("#", "");
-    if (hash && ["home", "history", "generation", "join", "database"].includes(hash)) {
+    if (hash && ["home", "history", "generation", "join"].includes(hash)) {
       navigateToView(hash, false);
     }
   });
 
-  // Load correct view if URL already has a hash
   const initialHash = window.location.hash.replace("#", "");
-  if (initialHash && ["home", "history", "generation", "join", "database"].includes(initialHash)) {
+  if (initialHash && ["home", "history", "generation", "join"].includes(initialHash)) {
     navigateToView(initialHash, false);
   }
 }
@@ -571,7 +565,6 @@ function initRouter() {
 window.navigateToView = function(viewId, updateHash = true) {
   currentView = viewId;
   
-  // Hide all view panes, show the targeted one
   document.querySelectorAll(".view-pane").forEach(pane => {
     pane.style.display = "none";
     pane.classList.remove("active");
@@ -583,7 +576,6 @@ window.navigateToView = function(viewId, updateHash = true) {
     setTimeout(() => activePane.classList.add("active"), 50);
   }
 
-  // Update header nav active styles
   document.querySelectorAll("header.app-header nav a").forEach(navLink => {
     if (navLink.getAttribute("data-target") === viewId) {
       navLink.classList.add("active");
@@ -592,12 +584,10 @@ window.navigateToView = function(viewId, updateHash = true) {
     }
   });
 
-  // Update browser hash
   if (updateHash) {
     window.location.hash = viewId;
   }
 
-  // Scroll to top gently
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -607,20 +597,17 @@ window.navigateToView = function(viewId, updateHash = true) {
 window.updatePoemDisplay = function() {
   const selectedBranch = document.getElementById("dialectSelect").value;
   const poemData = ZIBEI_POEMS[selectedBranch];
-  const dict = I18N[currentLang];
   
   document.getElementById("poemTitleText").innerText = currentLang === 'en' ? poemData.title.en : poemData.title.zh;
   
   const rawPoem = currentLang === 'en' ? poemData.poem.en : poemData.poem.zh;
   
-  // Format the poem text to vertical block styled columns or lines
   const formattedPoem = rawPoem.split("\n").map(line => {
     return `<div style="margin-bottom: 0.5rem; letter-spacing: ${currentLang === 'en' ? '2px' : '6px'}">${line}</div>`;
   }).join("");
   
   document.getElementById("poemBodyText").innerHTML = formattedPoem;
   
-  // Trigger match in case character was already written
   matchZibei();
 }
 
@@ -632,7 +619,7 @@ window.matchZibei = function() {
   const dict = I18N[currentLang];
 
   if (!inputChar) {
-    const sampleChar = poemData.chars[2]; // get a representative sample (e.g. '德')
+    const sampleChar = poemData.chars[2];
     const sampleText = currentLang === 'en'
       ? `Need an example? Try clicking <a href="#" onclick="event.preventDefault(); document.getElementById('zibeiCharInput').value='${sampleChar}'; matchZibei();" style="color: var(--gold-primary); text-decoration: underline; font-weight: bold;">${sampleChar}</a> to see how it works.`
       : `想试试看？点击 <a href="#" onclick="event.preventDefault(); document.getElementById('zibeiCharInput').value='${sampleChar}'; matchZibei();" style="color: var(--gold-primary); text-decoration: underline; font-weight: bold;">${sampleChar}</a> 即可查看示范效果。`;
@@ -647,18 +634,15 @@ window.matchZibei = function() {
     return;
   }
 
-  // Find index of character in poem (check in Chinese characters list)
   const charIndex = poemData.chars.indexOf(inputChar);
 
   if (charIndex !== -1) {
     const generationNumber = poemData.startGen + charIndex;
     
-    // Highlight character in the poem display box
     const rawPoem = currentLang === 'en' ? poemData.poem.en : poemData.poem.zh;
     
     const highlightedPoem = rawPoem.split("\n").map(line => {
       const spacedLine = line.split(" ").map(char => {
-        // Handle matching Pinyin as well as Chinese chars
         if (char === inputChar || (currentLang === 'en' && char.toLowerCase() === inputChar.toLowerCase())) {
           return `<span class="poem-char-highlight">${char}</span>`;
         }
@@ -674,7 +658,6 @@ window.matchZibei = function() {
       ? `Your generational character <strong>"${inputChar}"</strong> ranks you at <strong>Generation ${generationNumber}</strong>, tracing directly back to <strong>Chancellor Xiao He (萧何)</strong> as the 1st generation.`
       : `您的辈分用字<strong>“${inputChar}”</strong>在《${matchedBranchTitle}》中排在第 <strong>${generationNumber} 世</strong>，尊西汉开国相国<strong>萧何公</strong>为第1世祖。`;
 
-    // Show gorgeous result card
     resultBox.innerHTML = `
       <div class="result-badge">${inputChar}</div>
       <div class="result-generation">${currentLang === 'en' ? `Generation ${generationNumber}` : `世系第 ${generationNumber} 世`}</div>
@@ -689,7 +672,6 @@ window.matchZibei = function() {
       </button>
     `;
   } else {
-    // Character not in poem
     resultBox.innerHTML = `
       <div class="result-empty" style="animation: none;">
         <p style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--crimson-glow);">⚠️</p>
@@ -709,158 +691,8 @@ window.preFillJoinForm = function(char, genNum) {
 }
 
 /* ==========================================================================
-   4. REGISTRATION FORM WIZARD
+   4. REGISTRATION FORM SUBMISSION (WEB3FORMS)
    ========================================================================== */
-window.nextStep = function() {
-  if (currentStep < 4) {
-    // Validate current step fields before going to next step
-    if (!validateStep(currentStep)) {
-      return;
-    }
-    
-    document.getElementById(`step-${currentStep}`).classList.remove("active");
-    document.getElementById(`indicator-${currentStep}`).classList.remove("active");
-    document.getElementById(`indicator-${currentStep}`).classList.add("completed");
-    
-    currentStep++;
-    
-    document.getElementById(`step-${currentStep}`).classList.add("active");
-    document.getElementById(`indicator-${currentStep}`).classList.add("active");
-
-    updateWizardControls();
-  }
-}
-
-window.prevStep = function() {
-  if (currentStep > 1) {
-    document.getElementById(`step-${currentStep}`).classList.remove("active");
-    document.getElementById(`indicator-${currentStep}`).classList.remove("active");
-    
-    currentStep--;
-    
-    document.getElementById(`step-${currentStep}`).classList.add("active");
-    document.getElementById(`indicator-${currentStep}`).classList.add("active");
-    document.getElementById(`indicator-${currentStep}`).classList.remove("completed");
-
-    updateWizardControls();
-  }
-}
-
-function validateStep(step) {
-  const fields = {
-    1: [
-      { id: "inputEnglishName", name: currentLang === 'en' ? "Full Name (English)" : "英文姓名" },
-      { id: "inputEmail", name: currentLang === 'en' ? "Email Address" : "电子邮箱" }
-    ],
-    2: [
-      { id: "inputCountry", name: currentLang === 'en' ? "Current Country / Region" : "居住国家地区" }
-    ],
-    3: [
-      { id: "inputPhone", name: currentLang === 'en' ? "Contact Phone Number" : "联络电话" },
-      { id: "inputPrivacy", name: currentLang === 'en' ? "Contact Details Privacy" : "隐私设定" }
-    ]
-  };
-
-  const currentFields = fields[step];
-  if (!currentFields) return true;
-
-  for (let field of currentFields) {
-    const el = document.getElementById(field.id);
-    if (el && !el.value.trim()) {
-      alert(currentLang === 'en' ? `Please complete the field: ${field.name}` : `请填入必填项: ${field.name}`);
-      el.focus();
-      return false;
-    }
-    
-    // Basic email check
-    if (field.id === "inputEmail") {
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(el.value.trim())) {
-        alert(currentLang === 'en' ? "Please enter a valid email address." : "请输入有效的电子邮箱地址。");
-        el.focus();
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-function updateWizardControls() {
-  // Update progress bar percentage line
-  const progressPercent = ((currentStep - 1) / 3) * 100;
-  document.getElementById("wizardProgressLine").style.width = `${progressPercent}%`;
-
-  const btnPrev = document.getElementById("btnPrevStep");
-  const btnNext = document.getElementById("btnNextStep");
-  const btnSubmit = document.getElementById("btnSubmitForm");
-  const dict = I18N[currentLang];
-
-  // Refresh wizard button text
-  btnPrev.innerText = dict.btn_prev;
-  btnNext.innerText = dict.btn_next;
-  btnSubmit.innerText = dict.btn_submit;
-
-  if (currentStep === 1) {
-    btnPrev.disabled = true;
-  } else {
-    btnPrev.disabled = false;
-  }
-
-  if (currentStep === 4) {
-    btnNext.style.display = "none";
-    btnSubmit.style.display = "inline-block";
-  } else {
-    btnNext.style.display = "inline-block";
-    btnSubmit.style.display = "none";
-  }
-}
-
-/* ==========================================================================
-   5. SIMULATED DATABASE & LOCAL STORAGE
-   ========================================================================== */
-function initDatabase() {
-  if (!localStorage.getItem("xiaoclan_members")) {
-    localStorage.setItem("xiaoclan_members", JSON.stringify(INITIAL_CLAN_MEMBERS));
-  }
-}
-
-function getStoredMembers() {
-  return JSON.parse(localStorage.getItem("xiaoclan_members")) || INITIAL_CLAN_MEMBERS;
-}
-
-function saveMemberToDatabase(member) {
-  const members = getStoredMembers();
-  members.unshift(member); // Add new members to the top
-  localStorage.setItem("xiaoclan_members", JSON.stringify(members));
-  
-  // Re-sync directory page UI
-  renderDatabaseGrid();
-  updateDatabaseStats();
-}
-
-window.updateDatabaseStats = function() {
-  const members = getStoredMembers();
-  
-  // Total members count
-  document.getElementById("statTotalCount").innerText = members.length;
-  
-  // Unique regions/countries represented
-  const countries = new Set(members.map(m => m.country));
-  document.getElementById("statCountryCount").innerText = countries.size;
-
-  // Generation spectrum calculation (highest to lowest)
-  const gens = members.map(m => m.generationNum).filter(g => g > 0);
-  if (gens.length > 0) {
-    const minGen = Math.min(...gens);
-    const maxGen = Math.max(...gens);
-    document.getElementById("statGenSpread").innerText = currentLang === 'en' 
-      ? `${minGen}th - ${maxGen}th` 
-      : `${minGen}世 - ${maxGen}世`;
-  } else {
-    document.getElementById("statGenSpread").innerText = currentLang === 'en' ? "70th - 76th" : "70世 - 76世";
-  }
-}
-
 window.handleRegistration = function(event) {
   event.preventDefault();
   
@@ -870,11 +702,22 @@ window.handleRegistration = function(event) {
     return;
   }
 
-  // Compile registration data
-  const genNum = parseInt(document.getElementById("inputGenerationNum").value) || 0;
-  const rawZibei = document.getElementById("inputZibeiChar").value.trim();
+  const submitButton = document.getElementById("btnSubmitForm");
+  const originalBtnText = submitButton.innerText;
+  submitButton.disabled = true;
+  submitButton.innerText = currentLang === 'en' ? "Submitting..." : "正在提交...";
 
-  // Create unique Member ID
+  const englishName = document.getElementById("inputEnglishName").value.trim();
+  const chineseName = document.getElementById("inputChineseName").value.trim() || "N/A";
+  const email = document.getElementById("inputEmail").value.trim();
+  const surnameRomanization = document.getElementById("inputSurnameRomanization").value;
+  const country = document.getElementById("inputCountry").value;
+  const ancestralOrigin = document.getElementById("inputAncestralOrigin").value.trim() || (currentLang === 'en' ? "Ancestor Xiao He (萧何)" : "相国始祖萧何");
+  const zibeiChar = document.getElementById("inputZibeiChar").value.trim() || "N/A";
+  const genNum = parseInt(document.getElementById("inputGenerationNum").value) || 0;
+  const phone = document.getElementById("inputPhone").value.trim();
+  const messenger = document.getElementById("inputMessenger").value.trim() || "N/A";
+
   const formattedGen = genNum > 0 ? String(genNum).padStart(3, '0') : 'XXX';
   const uniqueRandNum = Math.floor(100000 + Math.random() * 900000);
   const memberId = `SC-${formattedGen}-${uniqueRandNum}`;
@@ -885,31 +728,78 @@ window.handleRegistration = function(event) {
 
   registeredMember = {
     id: memberId,
-    englishName: document.getElementById("inputEnglishName").value.trim(),
-    chineseName: document.getElementById("inputChineseName").value.trim() || null,
-    email: document.getElementById("inputEmail").value.trim(),
-    surnameRomanization: document.getElementById("inputSurnameRomanization").value,
-    country: document.getElementById("inputCountry").value,
-    ancestralOrigin: document.getElementById("inputAncestralOrigin").value.trim() || (currentLang === 'en' ? "Ancestor Xiao He (萧何)" : "相国始祖萧何"),
-    zibeiChar: rawZibei || "N/A",
+    englishName: englishName,
+    chineseName: chineseName !== "N/A" ? chineseName : null,
+    email: email,
+    surnameRomanization: surnameRomanization,
+    country: country,
+    ancestralOrigin: ancestralOrigin,
+    zibeiChar: zibeiChar,
     generationNum: genNum,
-    phone: document.getElementById("inputPhone").value.trim(),
-    messenger: document.getElementById("inputMessenger").value.trim() || "N/A",
-    privacy: document.getElementById("inputPrivacy").value,
+    phone: phone,
+    messenger: messenger,
     joinDate: localDateISO
   };
 
-  // Save to simulated database
-  saveMemberToDatabase(registeredMember);
+  const web3FormsKey = document.getElementById("web3formsAccessKey").value || WEB3FORMS_ACCESS_KEY;
+  
+  if (web3FormsKey === "YOUR_ACCESS_KEY_HERE" || !web3FormsKey) {
+    console.warn("Web3Forms access key is placeholder. Skipping email dispatch, loading scroll locally.");
+    showSuccessView(dateString);
+    submitButton.disabled = false;
+    submitButton.innerText = originalBtnText;
+    return;
+  }
 
-  // Generate scroll UI
+  const formData = {
+    access_key: web3FormsKey,
+    subject: `New Xiao Clan Registry: ${englishName} (${chineseName})`,
+    from_name: "Xiao Clan Portal",
+    "Member ID": memberId,
+    "Full Name": englishName,
+    "Chinese Name": chineseName,
+    "Email": email,
+    "Romanized Surname": surnameRomanization,
+    "Country": country,
+    "Ancestral Origin": ancestralOrigin,
+    "Zibei Character": zibeiChar,
+    "Generation": genNum > 0 ? genNum : "N/A",
+    "Phone Number": phone,
+    "Messenger ID": messenger,
+    "Registration Date": localDateISO
+  };
+
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(async (response) => {
+    let json = await response.json();
+    if (response.status == 200) {
+      showSuccessView(dateString);
+    } else {
+      console.log(response);
+      alert(json.message);
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    alert(currentLang === 'en' ? "Form submission failed. Please check your internet connection." : "表单提交失败，请检查您的网络连接。");
+  })
+  .finally(() => {
+    submitButton.disabled = false;
+    submitButton.innerText = originalBtnText;
+  });
+}
+
+function showSuccessView(dateString) {
   renderScrollCertificate(registeredMember, dateString);
-
-  // Show Certificate view panel, hide wizard form
   document.getElementById("membershipForm").style.display = "none";
   document.getElementById("scrollSuccessSection").style.display = "block";
-  
-  // Auto Scroll down to scroll success section
   window.scrollTo({
     top: document.getElementById("scrollSuccessSection").offsetTop - 100,
     behavior: "smooth"
@@ -917,16 +807,13 @@ window.handleRegistration = function(event) {
 }
 
 /* ==========================================================================
-   6. MEMBERSHIP SCROLL RENDERING
+   5. MEMBERSHIP SCROLL RENDERING
    ========================================================================== */
 function renderScrollCertificate(member, dateStr) {
   const dict = I18N[currentLang];
-  
-  // Format Chinese Name or display English name
   const zhName = member.chineseName ? `萧${member.chineseName.replace(/^萧/, '')}` : `${member.surnameRomanization} ${member.englishName}`;
   document.getElementById("scrollZhName").innerText = zhName;
 
-  // Fully localize scroll text depending on current language
   if (currentLang === 'en') {
     const genDetails = member.generationNum > 0 
       ? `belonging to Generation ${member.generationNum} of the Xiao Lineage, `
@@ -945,7 +832,7 @@ function renderScrollCertificate(member, dateStr) {
 
     document.getElementById("scrollDescBody").innerHTML = `
       兹证明宗亲 <strong>${zhName}</strong> 来自${member.country}，${originDesc}${zibeiDesc}。
-      今于天天下萧全球联谊会正式列谱登记，秉承祖训，光耀宗门。特颁此卷，永昭宗谊。
+      今于天天下萧全球联谊会正式列谱登记，秉承祖训，光耀宗门。特班此卷，永昭宗谊。
     `;
   }
 
@@ -953,7 +840,6 @@ function renderScrollCertificate(member, dateStr) {
   document.getElementById("scrollDate").innerText = `DATE: ${dateStr}`;
 }
 
-// Download/Print feature for membership scroll
 window.downloadCertificate = function() {
   if (!registeredMember) return;
   
@@ -1093,247 +979,164 @@ window.downloadCertificate = function() {
 }
 
 /* ==========================================================================
-   7. GLOBAL DIRECTORY / CONNECTION DATABASE DYNAMICS
+   6. FLOATING FAQ CHATBOT ENGINE
    ========================================================================== */
-window.renderDatabaseGrid = function(filteredList = null) {
-  const members = filteredList || getStoredMembers();
-  const gridContainer = document.getElementById("membersGridContainer");
-  const dict = I18N[currentLang];
+let chatbotOpen = false;
+let chatbotFirstOpen = true;
+
+// FAQs dataset
+const BOT_FAQS = {
+  en: [
+    {
+      id: "faq-heritage",
+      question: "Who was Chancellor Xiao He?",
+      answer: "<strong>Chancellor Xiao He (萧何, 257 BC – 193 BC)</strong> was the ultimate founding ancestor of the Xiao lineage. He was the First Prime Minister of the Han Dynasty and one of the Three Heroes of Early Han, known for his administrative mastery, logistics, and legal codification (Jiuzhang Lu)."
+    },
+    {
+      id: "faq-zibei",
+      question: "What is a Zibei / Generation character?",
+      answer: "Traditional Chinese families use a **Generation Poem (字辈 - Zibei)**, where each generation shares a specific character in their name. You can use our **Zibei Matcher** tool to enter your generational character and find your generation number!"
+    },
+    {
+      id: "faq-register",
+      question: "How do I register and is it free?",
+      answer: "Yes, registration is completely free! Go to the <strong>Join Clan</strong> page, enter your details (Name, Email, Phone/WeChat, and Ancestry Origin), sign the Covenant, and register. You will also get a beautiful Digital Scroll."
+    },
+    {
+      id: "faq-contact",
+      question: "How can I contact Kelvin directly?",
+      answer: "You can contact Kelvin Seow directly on Instagram at <a href='https://instagram.com/x.s.seow' target='_blank' style='color: var(--gold-primary); text-decoration: underline; font-weight: bold;'>@x.s.seow</a>. Click the link to message him directly!"
+    }
+  ],
+  zh: [
+    {
+      id: "faq-heritage",
+      question: "萧何公是谁？",
+      answer: "<strong>相国萧何 (公元前257年－前193年)</strong> 是萧氏的始祖。他是西汉开国功臣、第一任相国、汉初三杰之首，以卓越的行政管理、后勤保障和制定《九章律》而闻名于世。"
+    },
+    {
+      id: "faq-zibei",
+      question: "什么是昭穆字辈派语？",
+      answer: "中华传统家族使用**字辈诗（派语）**，每一代人在名字中共享一个特定的汉字。您可以使用我们的**字辈查询**工具输入您的字辈，即可自动查询世系辈分！"
+    },
+    {
+      id: "faq-register",
+      question: "如何登记，是免费的吗？",
+      answer: "是的，登记是完全免费的！请前往**宗亲登记**页面填入您的基本信息，签署《宗盟誓约》并提交，即可获得专属您的精美数字化荣誉卷轴。"
+    },
+    {
+      id: "faq-contact",
+      question: "如何直接联系管理员 Kelvin？",
+      answer: "您可以直接在 Instagram 上联系 Kelvin Seow：账号为 <a href='https://instagram.com/x.s.seow' target='_blank' style='color: var(--gold-primary); text-decoration: underline; font-weight: bold;'>@x.s.seow</a>。点击链接即可发送私信咨询！"
+    }
+  ]
+};
+
+window.toggleChatbot = function() {
+  const chatWindow = document.getElementById("chatbotWindow");
+  const badge = document.getElementById("chatNotificationBadge");
   
-  gridContainer.innerHTML = "";
+  chatbotOpen = !chatbotOpen;
   
-  if (members.length === 0) {
-    gridContainer.innerHTML = `
-      <div class="glass-card" style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; border-style: dashed;">
-        <p style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--gold-primary);">🔍</p>
-        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">${dict.dir_empty_title}</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">
-          ${dict.dir_empty_desc}
-        </p>
-      </div>
-    `;
-    return;
+  if (chatbotOpen) {
+    chatWindow.style.display = "flex";
+    if (badge) badge.style.display = "none";
+    if (chatbotFirstOpen) {
+      initChatbot();
+      chatbotFirstOpen = false;
+    }
+  } else {
+    chatWindow.style.display = "none";
   }
+}
 
-  // Populate Filter Country options dynamically depending on active language
-  const filterSelect = document.getElementById("filterCountrySelect");
-  const currentSelectedValue = filterSelect.value;
-  filterSelect.innerHTML = `
-    <option value="all">${dict.dir_all_regions}</option>
-    <option value="Singapore">Singapore (${currentLang === 'en' ? 'Singapore' : '新加坡'})</option>
-    <option value="Indonesia">Indonesia (${currentLang === 'en' ? 'Indonesia' : '印度尼西亚'})</option>
-    <option value="China">China (${currentLang === 'en' ? 'China' : '中国'})</option>
-    <option value="Malaysia">Malaysia (${currentLang === 'en' ? 'Malaysia' : '马来西亚'})</option>
-    <option value="Europe">Europe (${currentLang === 'en' ? 'Europe' : '欧洲'})</option>
-    <option value="United States">United States (${currentLang === 'en' ? 'United States' : '美国'})</option>
-    <option value="Australia">Australia (${currentLang === 'en' ? 'Australia' : '澳大利亚'})</option>
-  `;
-  filterSelect.value = currentSelectedValue;
+function initChatbot() {
+  const messagesContainer = document.getElementById("chatbotMessages");
+  messagesContainer.innerHTML = "";
+  
+  const welcomeText = I18N[currentLang].bot_welcome;
+  appendMessage("bot", welcomeText);
+  
+  renderQuickReplies();
+}
 
-  // Refresh sorting select values text
-  const sortSelector = document.getElementById("sortSelector");
-  const currentSortVal = sortSelector.value;
-  sortSelector.innerHTML = `
-    <option value="default">${dict.sort_default}</option>
-    <option value="generation-asc">${dict.sort_gen_asc}</option>
-    <option value="generation-desc">${dict.sort_gen_desc}</option>
-    <option value="alphabetical">${dict.sort_alpha}</option>
-  `;
-  sortSelector.value = currentSortVal;
-
-  members.forEach(member => {
-    // Generate card element
-    const card = document.createElement("div");
-    card.className = "member-card";
-    
-    // Format Chinese Name placeholder
-    const zhName = member.chineseName ? member.chineseName : "N/A";
-    
-    // Country flag icons
-    let flag = "🌐";
-    let localizedCountry = member.country;
-    if (member.country === "Singapore") { flag = "🇸🇬"; localizedCountry = currentLang === 'en' ? 'Singapore' : '新加坡'; }
-    else if (member.country === "Indonesia") { flag = "🇮🇩"; localizedCountry = currentLang === 'en' ? 'Indonesia' : '印度尼西亚'; }
-    else if (member.country === "China") { flag = "🇨🇳"; localizedCountry = currentLang === 'en' ? 'China' : '中国'; }
-    else if (member.country === "Malaysia") { flag = "🇲🇾"; localizedCountry = currentLang === 'en' ? 'Malaysia' : '马来西亚'; }
-    else if (member.country === "Europe") { flag = "🇪🇺"; localizedCountry = currentLang === 'en' ? 'Europe' : '欧洲'; }
-    else if (member.country === "United States") { flag = "🇺🇸"; localizedCountry = currentLang === 'en' ? 'United States' : '美国'; }
-    else if (member.country === "Australia") { flag = "🇦🇺"; localizedCountry = currentLang === 'en' ? 'Australia' : '澳大利亚'; }
-
-    // Format Connect Button based on privacy settings
-    let connectHtml = `<span class="connect-private">${dict.card_lbl_private}</span>`;
-    if (member.privacy === "public") {
-      let linkHref = "#";
-      let linkText = "Connect";
-      
-      if (member.phone.includes("+")) {
-        const cleanPhone = member.phone.replace(/[^0-9]/g, "");
-        linkHref = `https://wa.me/${cleanPhone}`;
-        linkText = "WhatsApp";
-      } else if (member.messenger.toLowerCase().includes("wechat")) {
-        linkHref = `javascript:alert('WeChat ID: ${member.messenger.replace("WeChat:", "").trim()}')`;
-        linkText = "WeChat";
-      }
-      
-      connectHtml = `
-        <a href="${linkHref}" target="_blank" class="connect-btn">
-          💬 ${linkText}
-        </a>
-      `;
-    }
-
-    let contactVal = `🔒 ${dict.card_lbl_private}`;
-    if (member.privacy === "public") {
-      contactVal = member.phone;
-      if (member.messenger && member.messenger !== "N/A" && !member.messenger.includes(member.phone)) {
-        contactVal += ` | ${member.messenger}`;
-      }
-    }
-
-    card.innerHTML = `
-      <div class="member-card-header">
-        <div class="member-name-group">
-          <span class="member-name-en">${member.englishName}</span>
-          <span class="member-name-zh">${zhName}</span>
-        </div>
-        <span class="member-country-badge">${flag} ${localizedCountry}</span>
-      </div>
-      <div class="member-details">
-        <div class="detail-item">
-          <span class="detail-lbl">${dict.card_lbl_variant}</span>
-          <span class="detail-val">${member.surnameRomanization}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-lbl">${dict.card_lbl_origin}</span>
-          <span class="detail-val" title="${member.ancestralOrigin}">${member.ancestralOrigin}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-lbl">${dict.card_lbl_zibei}</span>
-          <span class="detail-val">${member.zibeiChar}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-lbl">${dict.card_lbl_gen}</span>
-          <span class="detail-val">${member.generationNum > 0 ? `${member.generationNum}${currentLang === 'en' ? 'th 世' : ' 世'}` : "N/A"}</span>
-        </div>
-        <div class="detail-item" style="grid-column: 1 / span 2; border-top: 1px dashed var(--glass-border); padding-top: 0.8rem; margin-top: 0.2rem;">
-          <span class="detail-lbl">${currentLang === 'en' ? 'Contact Details' : '联络方式 / 电话'}</span>
-          <span class="detail-val" style="color: var(--gold-primary); font-weight: 700; font-size: 0.92rem;">
-            ${contactVal}
-          </span>
-        </div>
-      </div>
-      <div class="member-card-footer">
-        <span class="member-id">${member.id}</span>
-        ${connectHtml}
-      </div>
-    `;
-    
-    gridContainer.appendChild(card);
+function renderQuickReplies() {
+  const repliesContainer = document.getElementById("chatbotQuickReplies");
+  repliesContainer.innerHTML = "";
+  
+  const faqs = BOT_FAQS[currentLang];
+  faqs.forEach(faq => {
+    const btn = document.createElement("button");
+    btn.className = "quick-reply-btn";
+    btn.innerText = faq.question;
+    btn.onclick = () => selectQuickReply(faq.id);
+    repliesContainer.appendChild(btn);
   });
 }
 
-window.filterDatabase = function() {
-  const keyword = document.getElementById("searchNameInput").value.toLowerCase().trim();
-  const selectedCountry = document.getElementById("filterCountrySelect").value;
-  const sortBy = document.getElementById("sortSelector").value;
+function appendMessage(sender, text) {
+  const messagesContainer = document.getElementById("chatbotMessages");
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `chat-msg ${sender}`;
+  msgDiv.innerHTML = text;
+  messagesContainer.appendChild(msgDiv);
   
-  let members = getStoredMembers();
-  
-  // Apply Search Keyword Filter
-  if (keyword) {
-    members = members.filter(m => {
-      const matchEng = m.englishName.toLowerCase().includes(keyword);
-      const matchZh = m.chineseName && m.chineseName.toLowerCase().includes(keyword);
-      const matchZibei = m.zibeiChar && m.zibeiChar.toLowerCase().includes(keyword);
-      const matchRoman = m.surnameRomanization.toLowerCase().includes(keyword);
-      const matchId = m.id.toLowerCase().includes(keyword);
-      return matchEng || matchZh || matchZibei || matchRoman || matchId;
-    });
-  }
-
-  // Apply Region Filter
-  if (selectedCountry !== "all") {
-    members = members.filter(m => m.country === selectedCountry);
-  }
-
-  // Apply Sorting Engine
-  if (sortBy === "generation-asc") {
-    members.sort((a, b) => {
-      const genA = a.generationNum || 999;
-      const genB = b.generationNum || 999;
-      return genA - genB;
-    });
-  } else if (sortBy === "generation-desc") {
-    members.sort((a, b) => {
-      const genA = a.generationNum || 0;
-      const genB = b.generationNum || 0;
-      return genB - genA;
-    });
-  } else if (sortBy === "alphabetical") {
-    members.sort((a, b) => a.englishName.localeCompare(b.englishName));
-  } else {
-    members.sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate));
-  }
-
-  renderDatabaseGrid(members);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-/* ==========================================================================
-   8. EVENTS & RSVP HANDLERS
-   ========================================================================== */
-window.renderEvents = function() {
-  const eventsGrid = document.getElementById("eventsGrid");
-  if (!eventsGrid) return;
-  eventsGrid.innerHTML = "";
-
-  CLAN_EVENTS.forEach(evt => {
-    const card = document.createElement("div");
-    card.className = "event-card";
+window.selectQuickReply = function(faqId) {
+  const faqs = BOT_FAQS[currentLang];
+  const matchedFaq = faqs.find(f => f.id === faqId);
+  
+  if (matchedFaq) {
+    appendMessage("user", matchedFaq.question);
     
-    // Check if user already RSVPed in this session
-    const isJoined = sessionStorage.getItem(`rsvp-${evt.id}`) === "true";
-    const btnText = isJoined 
-      ? (currentLang === 'en' ? "Joined ✓" : "已加入 RSVP ✓") 
-      : (currentLang === 'en' ? "RSVP Now" : "我要报名 RSVP");
-      
-    const btnClass = isJoined ? "event-btn joined" : "event-btn";
-
-    const evtTitle = currentLang === 'en' ? evt.title.en : evt.title.zh;
-    const evtMonth = currentLang === 'en' ? evt.month.en : evt.month.zh;
-    const evtLoc = currentLang === 'en' ? evt.location.en : evt.location.zh;
-
-    card.innerHTML = `
-      <div class="event-date-block">
-        <span class="event-month">${evtMonth}</span>
-        <span class="event-day">${evt.day}</span>
-        <span class="event-year">${evt.year}</span>
-      </div>
-      <div class="event-body">
-        <div>
-          <h3 class="event-title">${evtTitle}</h3>
-          <div class="event-info">
-            <span style="display:block; margin-bottom: 0.2rem;">🕒 ${evt.time}</span>
-            <span>📍 ${evtLoc}</span>
-          </div>
-        </div>
-        <button class="${btnClass}" onclick="toggleRSVP('${evt.id}')">${btnText}</button>
-      </div>
-    `;
-    
-    eventsGrid.appendChild(card);
-  });
+    setTimeout(() => {
+      appendMessage("bot", matchedFaq.answer);
+    }, 400);
+  }
 }
 
-window.toggleRSVP = function(evtId) {
-  const isJoined = sessionStorage.getItem(`rsvp-${evtId}`) === "true";
+window.handleChatSubmit = function(event) {
+  event.preventDefault();
+  const inputEl = document.getElementById("chatbotInputText");
+  const text = inputEl.value.trim();
+  if (!text) return;
   
-  if (isJoined) {
-    sessionStorage.removeItem(`rsvp-${evtId}`);
-    alert(currentLang === 'en' ? "You have cancelled your RSVP for this gathering." : "您已取消此活动的报名预约。");
-  } else {
-    sessionStorage.setItem(`rsvp-${evtId}`, "true");
-    alert(currentLang === 'en' ? "Thank you! You have successfully RSVPed. An email connection ticket has been sent." : "感谢报名！您已成功预约活动，联谊票已发送至您的联络邮箱。");
+  appendMessage("user", text);
+  inputEl.value = "";
+  
+  setTimeout(() => {
+    const query = text.toLowerCase();
+    const faqs = BOT_FAQS[currentLang];
+    
+    let matchedAnswer = null;
+    
+    if (query.includes("xiao he") || query.includes("ancestor") || query.includes("萧何") || query.includes("始祖")) {
+      matchedAnswer = faqs.find(f => f.id === "faq-heritage").answer;
+    } else if (query.includes("zibei") || query.includes("generation") || query.includes("字辈") || query.includes("昭穆")) {
+      matchedAnswer = faqs.find(f => f.id === "faq-zibei").answer;
+    } else if (query.includes("join") || query.includes("register") || query.includes("free") || query.includes("登记") || query.includes("加入") || query.includes("免费")) {
+      matchedAnswer = faqs.find(f => f.id === "faq-register").answer;
+    } else if (query.includes("contact") || query.includes("kelvin") || query.includes("instagram") || query.includes("ig") || query.includes("联系")) {
+      matchedAnswer = faqs.find(f => f.id === "faq-contact").answer;
+    }
+    
+    if (matchedAnswer) {
+      appendMessage("bot", matchedAnswer);
+    } else {
+      const fallbackText = currentLang === 'en'
+        ? `I am an automated chatbot and didn't quite catch that. For custom inquiries, please message Kelvin Seow directly on Instagram at <a href='https://instagram.com/x.s.seow' target='_blank' style='color: var(--gold-primary); text-decoration: underline; font-weight: bold;'>@x.s.seow</a>.`
+        : `我是自动答复助手，未能完全理解您的问题。如有其他咨询，请直接在 Instagram 上私信联系 Kelvin Seow：<a href='https://instagram.com/x.s.seow' target='_blank' style='color: var(--gold-primary); text-decoration: underline; font-weight: bold;'>@x.s.seow</a>。`;
+      appendMessage("bot", fallbackText);
+    }
+  }, 500);
+}
+
+const originalToggleLanguage = window.toggleLanguage;
+window.toggleLanguage = function(lang) {
+  originalToggleLanguage(lang);
+  if (chatbotOpen) {
+    initChatbot();
   }
-  
-  renderEvents();
 }

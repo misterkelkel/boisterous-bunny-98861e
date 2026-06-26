@@ -3,8 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official Global Association for the Xiao Clan. Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Connect with family members across Singapore, Indonesia, China, and Europe. Join us today.">
+  
+  <!-- Primary SEO Meta Tags -->
   <title>Xiao Clan Global Association | 萧氏宗亲会</title>
+  <meta name="description" content="Official Global Association for the Xiao Clan. Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Connect with family members across Singapore, Indonesia, China, and Europe. Join us today.">
+  <meta name="keywords" content="Xiao Clan, Siow Clan, Seow Clan, Xiao He, 萧何, 萧氏宗亲会, Zibei Matcher, 字辈, Chinese Genealogy">
+  <meta name="author" content="Xiao Clan Global Association">
+  
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xiaoclan.org/">
+  <meta property="og:title" content="Xiao Clan Global Association | 萧氏宗亲会">
+  <meta property="og:description" content="Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Join the registry and match your Zibei generation character.">
+  <meta property="og:image" content="https://xiaoclan.org/assets/chancellor_xiao_he.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://xiaoclan.org/">
+  <meta property="twitter:title" content="Xiao Clan Global Association | 萧氏宗亲会">
+  <meta property="twitter:description" content="Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Join the registry and match your Zibei generation character.">
+  <meta property="twitter:image" content="https://xiaoclan.org/assets/chancellor_xiao_he.png">
+
+  <!-- Google Search Console Verification Placeholder -->
+  <!-- Replace content with your verification code from Google Search Console -->
+  <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE">
+
+  <!-- Google Analytics 4 (gtag.js) Placeholder -->
+  <!-- To enable, replace G-XXXXXXXXXX with your Google Analytics Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- JSON-LD Structured Data Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Xiao Clan Global Association",
+    "alternateName": "萧氏宗亲会",
+    "url": "https://xiaoclan.org/",
+    "logo": "https://xiaoclan.org/assets/chancellor_xiao_he.png",
+    "description": "The official global association dedicated to connecting and preserving the lineage and heritage of the Xiao Clan, descending from Chancellor Xiao He.",
+    "sameAs": [
+      "https://www.facebook.com/people/SIOWS-CLAN-GUILD-ASSOCIATION/100081564037252/"
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,7 +79,6 @@
       <a href="#history" data-target="history" data-i18n="nav_heritage">Xiao He Heritage</a>
       <a href="#generation" data-target="generation" data-i18n="nav_matcher">Zibei Matcher</a>
       <a href="#join" data-target="join" data-i18n="nav_join">Join Clan</a>
-      <a href="#database" data-target="database" data-i18n="nav_directory">Global Directory</a>
     </nav>
   </header>
 
@@ -60,7 +108,7 @@
             <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="promo_desc">
               Connecting thousands of Xiao family members across international borders. Bridge cultural distances from South-East Asia to the Western Hemisphere and form real familial bonds.
             </p>
-            <button class="btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="navigateToView('database')" data-i18n="promo_browse">Browse Directory</button>
+            <button class="btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="navigateToView('join')" data-i18n="btn_join_clan">Join the Clan</button>
           </div>
           <div class="heritage-art-frame">
             <div class="heritage-image-mock" id="heritageMockImage" style="background-image: url('assets/chancellor_xiao_he.png');">
@@ -69,18 +117,6 @@
               <p class="heritage-art-subtitle" data-i18n="promo_art_sub">Founding Ancestor of the Xiao Lineage</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Events RSVP Highlights -->
-      <section class="container events-section" style="padding: 4rem 2rem;">
-        <div class="section-header">
-          <h2 class="section-title-en" data-i18n="events_section_title">Seasonal Gatherings</h2>
-          <p class="section-title-zh" data-i18n="events_section_sub">Clan Fellowship Events</p>
-          <div class="section-divider"></div>
-        </div>
-        <div class="event-grid" id="eventsGrid">
-          <!-- Dynamically populated events -->
         </div>
       </section>
     </div>
@@ -225,131 +261,98 @@
         </div>
 
         <div class="wizard-container">
-          <!-- Wizard progress bar -->
-          <div class="wizard-steps">
-            <div class="wizard-step-line-active" id="wizardProgressLine"></div>
-            <div class="step-indicator active" id="indicator-1">1</div>
-            <div class="step-indicator" id="indicator-2">2</div>
-            <div class="step-indicator" id="indicator-3">3</div>
-            <div class="step-indicator" id="indicator-4">4</div>
-          </div>
-
           <form id="membershipForm" class="glass-card" onsubmit="handleRegistration(event)">
-            
-            <!-- STEP 1: PERSONAL PROFILE -->
-            <div class="form-step active" id="step-1">
-              <h2 class="poem-title" style="text-align: left; margin-bottom: 1.5rem;" data-i18n="wizard_step_1">Step 1: Personal Profile</h2>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div class="form-group">
-                  <label for="inputEnglishName" data-i18n="lbl_eng_name">Full Name (English) *</label>
-                  <input type="text" id="inputEnglishName" placeholder="e.g., Alexander Xiao" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputChineseName" data-i18n="lbl_zh_name">Chinese Name (Optional)</label>
-                  <input type="text" id="inputChineseName" placeholder="e.g., 萧国祥">
-                </div>
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                <div class="form-group">
-                  <label for="inputEmail" data-i18n="lbl_email">Email Address *</label>
-                  <input type="email" id="inputEmail" placeholder="e.g., alexander@xiaoclan.org" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputSurnameRomanization" data-i18n="lbl_romanization">Surname Romanization *</label>
-                  <select id="inputSurnameRomanization" required>
-                    <option value="Xiao">Xiao (Hanyu Pinyin)</option>
-                    <option value="Siow">Siow / Siew (Hakka/Cantonese)</option>
-                    <option value="Seow">Seow (Teochew/Hokkien)</option>
-                    <option value="Shiau">Shiau (Taiwanese Romanized)</option>
-                    <option value="Sieu">Sieu (Southeast Asian)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <!-- Web3Forms Config -->
+            <input type="hidden" name="access_key" id="web3formsAccessKey" value="b0d1582e-dae1-427d-afbb-69a0c18c1b1a">
+            <input type="hidden" name="subject" value="New Xiao Clan Registry Submission">
+            <input type="hidden" name="from_name" value="Xiao Clan Global Portal">
 
-            <!-- STEP 2: ANCESTRY & GEOGRAPHY -->
-            <div class="form-step" id="step-2">
-              <h2 class="poem-title" style="text-align: left; margin-bottom: 1.5rem;" data-i18n="wizard_step_2">Step 2: Ancestry & Geography</h2>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div class="form-group">
-                  <label for="inputCountry" data-i18n="lbl_country">Current Country / Region *</label>
-                  <select id="inputCountry" required>
-                    <option value="" data-i18n="placeholder_select_country">Select country...</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="China">China</option>
-                    <option value="Malaysia">Malaysia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="United States">United States</option>
-                    <option value="Australia">Australia</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="inputAncestralOrigin" data-i18n="lbl_ancestral">Ancestral Origin Village (Ancestral Hall)</label>
-                  <input type="text" id="inputAncestralOrigin" placeholder="e.g., Luling, Jiangxi / Anxi, Fujian">
-                </div>
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                <div class="form-group">
-                  <label for="inputZibeiChar" data-i18n="lbl_zibei_char">Generational Character (If known)</label>
-                  <input type="text" id="inputZibeiChar" placeholder="e.g., 德 / 泽 / 国" maxlength="1">
-                </div>
-                <div class="form-group">
-                  <label for="inputGenerationNum" data-i18n="lbl_gen_num">Generation Number (If known)</label>
-                  <input type="number" id="inputGenerationNum" placeholder="e.g., 75" min="1">
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 3: CONTACT & CONNECTION -->
-            <div class="form-step" id="step-3">
-              <h2 class="poem-title" style="text-align: left; margin-bottom: 1.5rem;" data-i18n="wizard_step_3">Step 3: Family Connection</h2>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;" data-i18n="lbl_contact_desc">
-                To enable family connection across borders (from Singapore to Indonesia, China to Europe, etc.), please provide a contact method.
-              </p>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div class="form-group">
-                  <label for="inputPhone" data-i18n="lbl_phone">Contact Phone Number * (Include Country Code)</label>
-                  <input type="tel" id="inputPhone" placeholder="e.g., +65 9123 4567" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputMessenger" data-i18n="lbl_messenger">Preferred Messenger / ID</label>
-                  <input type="text" id="inputMessenger" placeholder="e.g., WeChat ID: alex_xiao / WhatsApp">
-                </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputEnglishName" data-i18n="lbl_eng_name">Full Name (English) *</label>
+                <input type="text" id="inputEnglishName" name="name" placeholder="e.g., Alexander Xiao" required>
               </div>
               <div class="form-group">
-                <label for="inputPrivacy" data-i18n="lbl_privacy">Contact Details Visibility *</label>
-                <select id="inputPrivacy" required>
-                  <option value="public" data-i18n="privacy_public">Visible to Registered Clan Members (Recommended to connect with family)</option>
-                  <option value="private" data-i18n="privacy_private">Admin Only (Keep completely private)</option>
+                <label for="inputChineseName" data-i18n="lbl_zh_name">Chinese Name (Optional)</label>
+                <input type="text" id="inputChineseName" name="chinese_name" placeholder="e.g., 萧国祥">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputEmail" data-i18n="lbl_email">Email Address *</label>
+                <input type="email" id="inputEmail" name="email" placeholder="e.g., alexander@xiaoclan.org" required>
+              </div>
+              <div class="form-group">
+                <label for="inputSurnameRomanization" data-i18n="lbl_romanization">Surname Romanization *</label>
+                <select id="inputSurnameRomanization" name="surname_romanization" required>
+                  <option value="Xiao">Xiao (Hanyu Pinyin)</option>
+                  <option value="Siow">Siow / Siew (Hakka/Cantonese)</option>
+                  <option value="Seow">Seow (Teochew/Hokkien)</option>
+                  <option value="Shiau">Shiau (Taiwanese Romanized)</option>
+                  <option value="Sieu">Sieu (Southeast Asian)</option>
                 </select>
               </div>
             </div>
 
-            <!-- STEP 4: CLAN OATH -->
-            <div class="form-step" id="step-4">
-              <h2 class="poem-title" style="text-align: left; margin-bottom: 1.5rem;" data-i18n="wizard_step_4">Step 4: The Clan Oath</h2>
-              <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--gold-dark); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; font-family: var(--font-serif-zh); line-height: 2.2; letter-spacing: 2px; color: var(--text-secondary); text-align: center;">
-                <h3 style="color: var(--gold-primary); font-size: 1.4rem; margin-bottom: 1.5rem;" data-i18n="oath_title">萧氏宗盟誓约</h3>
-                <p data-i18n="oath_p1">余虽身处五洲万国，血脉之系终归一源。</p>
-                <p data-i18n="oath_p2">敬拜先祖，上昭汉相萧何功烈，慎终追远。</p>
-                <p data-i18n="oath_p3">敦睦宗谊，守望相助，四海一家，同气连枝。</p>
-                <p data-i18n="oath_p4">誓传祖德，绳其祖武，传灯不熄，奕代昌荣。</p>
-                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gold-primary);" data-i18n="oath_translate">I pledge to honor my ancestors, foster sibling brotherhood across all borders, and support family connection with compassion and integrity.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputCountry" data-i18n="lbl_country">Current Country / Region *</label>
+                <select id="inputCountry" name="country" required>
+                  <option value="" data-i18n="placeholder_select_country">Select country...</option>
+                  <option value="Singapore">Singapore</option>
+                  <option value="Indonesia">Indonesia</option>
+                  <option value="China">China</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="Europe">Europe</option>
+                  <option value="United States">United States</option>
+                  <option value="Australia">Australia</option>
+                </select>
               </div>
-              <div class="form-group" style="flex-direction: row; gap: 0.8rem; align-items: flex-start; text-align: left;">
-                <input type="checkbox" id="inputAgreeOath" required style="width: auto; margin-top: 0.3rem;">
-                <label for="inputAgreeOath" style="color: var(--text-primary); cursor: pointer;" data-i18n="lbl_agree_oath">I solemnly sign this Clan Oath and request formal inclusion in the Xiao Clan Registry.</label>
+              <div class="form-group">
+                <label for="inputAncestralOrigin" data-i18n="lbl_ancestral">Ancestral Origin Village (Ancestral Hall)</label>
+                <input type="text" id="inputAncestralOrigin" name="ancestral_origin" placeholder="e.g., Luling, Jiangxi / Anxi, Fujian">
               </div>
             </div>
 
-            <!-- Wizard Nav Buttons -->
-            <div class="wizard-buttons">
-              <button type="button" class="btn-secondary" id="btnPrevStep" disabled onclick="prevStep()" data-i18n="btn_prev">Previous</button>
-              <button type="button" class="btn-primary" id="btnNextStep" onclick="nextStep()" data-i18n="btn_next">Next</button>
-              <button type="submit" class="btn-primary" id="btnSubmitForm" style="display: none;" data-i18n="btn_submit">Submit Registry</button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputZibeiChar" data-i18n="lbl_zibei_char">Generational Character (If known)</label>
+                <input type="text" id="inputZibeiChar" name="zibei_character" placeholder="e.g., 德 / 泽 / 国" maxlength="2">
+              </div>
+              <div class="form-group">
+                <label for="inputGenerationNum" data-i18n="lbl_gen_num">Generation Number (If known)</label>
+                <input type="number" id="inputGenerationNum" name="generation_number" placeholder="e.g., 75" min="1">
+              </div>
             </div>
 
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputPhone" data-i18n="lbl_phone">Contact Phone Number * (Include Country Code)</label>
+                <input type="tel" id="inputPhone" name="phone" placeholder="e.g., +65 9123 4567" required>
+              </div>
+              <div class="form-group">
+                <label for="inputMessenger" data-i18n="lbl_messenger">Preferred Messenger / ID</label>
+                <input type="text" id="inputMessenger" name="messenger_id" placeholder="e.g., WeChat ID: alex_xiao / WhatsApp">
+              </div>
+            </div>
+
+            <!-- THE CLAN OATH -->
+            <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--gold-dark); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; font-family: var(--font-serif-zh); line-height: 2.2; letter-spacing: 2px; color: var(--text-secondary); text-align: center;">
+              <h3 style="color: var(--gold-primary); font-size: 1.4rem; margin-bottom: 1.5rem;" data-i18n="oath_title">萧氏宗盟誓约</h3>
+              <p data-i18n="oath_p1">余虽身处五洲万国，血脉之系终归一源。</p>
+              <p data-i18n="oath_p2">敬拜先祖，上昭汉相萧何功烈，慎终追远。</p>
+              <p data-i18n="oath_p3">敦睦宗谊，守望相助，四海一家，同气连枝。</p>
+              <p data-i18n="oath_p4">誓传祖德，绳其祖武，传灯不熄，奕代昌荣。</p>
+              <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gold-primary);" data-i18n="oath_translate">I pledge to honor my ancestors, foster sibling brotherhood across all borders, and support family connection with compassion and integrity.</p>
+            </div>
+
+            <div class="form-group" style="flex-direction: row; gap: 0.8rem; align-items: flex-start; text-align: left; margin-bottom: 2rem;">
+              <input type="checkbox" id="inputAgreeOath" required style="width: auto; margin-top: 0.3rem;">
+              <label for="inputAgreeOath" style="color: var(--text-primary); cursor: pointer;" data-i18n="lbl_agree_oath">I solemnly sign this Clan Oath and request formal inclusion in the Xiao Clan Registry.</label>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btnSubmitForm" style="width: 100%; display: block;" data-i18n="btn_submit">Submit Registry</button>
           </form>
         </div>
 
@@ -393,77 +396,7 @@
 
           <div class="cta-group" style="margin-top: 2rem;">
             <button class="btn-primary" onclick="downloadCertificate()" data-i18n="btn_download_scroll">Download Digital Scroll</button>
-            <button class="btn-secondary" onclick="navigateToView('database')" data-i18n="btn_view_db">View Connection Database</button>
           </div>
-        </div>
-
-      </section>
-    </div>
-
-    <!-- GLOBAL DIRECTORY / CONNECTION DATABASE VIEW -->
-    <div class="view-pane" id="view-database" style="display: none;">
-      <section class="container">
-        <div class="section-header">
-          <h1 class="section-title-en" data-i18n="dir_title">Global Clan Connection Database</h1>
-          <p class="section-title-zh" data-i18n="dir_sub">Global Kinship Directory · Bound by One Sea</p>
-          <div class="section-divider"></div>
-        </div>
-
-        <div style="max-width: 800px; margin: 0 auto 3rem auto; text-align: center; color: var(--text-secondary);">
-          <p data-i18n="dir_desc">
-            Welcome to the direct contact registry of the global Xiao family. Browse members from Singapore, Indonesia, China, Europe, and beyond. Search by name, filter by region or generation, and connect directly via WeChat or WhatsApp to build sibling bridges.
-          </p>
-        </div>
-
-        <!-- Database statistics -->
-        <div class="member-stats-row">
-          <div class="stat-box">
-            <div class="stat-num" id="statTotalCount">0</div>
-            <div class="stat-label" data-i18n="dir_stat_total">Total Clan Family</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num" id="statCountryCount">0</div>
-            <div class="stat-label" data-i18n="dir_stat_regions">Regions Represented</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num" id="statGenSpread">0</div>
-            <div class="stat-label" data-i18n="dir_stat_gens">Generation Spread</div>
-          </div>
-        </div>
-
-        <!-- Filtering Controls -->
-        <div class="db-controls-grid">
-          <div class="form-group">
-            <label for="searchNameInput" data-i18n="dir_lbl_search">Search Family Member (Name or Generation Character)</label>
-            <input type="text" id="searchNameInput" placeholder="e.g., Alexander, 德, Seow" oninput="filterDatabase()" data-i18n="dir_lbl_search">
-          </div>
-          <div class="form-group">
-            <label for="filterCountrySelect" data-i18n="dir_lbl_filter">Filter by Country / Region</label>
-            <select id="filterCountrySelect" onchange="filterDatabase()">
-              <option value="all" data-i18n="dir_all_regions">All Global Regions</option>
-              <option value="Singapore">Singapore</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="China">China</option>
-              <option value="Malaysia">Malaysia</option>
-              <option value="Europe">Europe</option>
-              <option value="United States">United States</option>
-              <option value="Australia">Australia</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sortSelector" data-i18n="dir_lbl_sort">Sort Lineage</label>
-            <select id="sortSelector" onchange="filterDatabase()">
-              <option value="default" data-i18n="sort_default">Default (Recent Join)</option>
-              <option value="generation-asc" data-i18n="sort_gen_asc">Generation (Oldest first)</option>
-              <option value="generation-desc" data-i18n="sort_gen_desc">Generation (Youngest first)</option>
-              <option value="alphabetical" data-i18n="sort_alpha">Name (Alphabetical)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Directory Grid -->
-        <div class="members-grid" id="membersGridContainer">
-          <!-- Dynamically populated member cards -->
         </div>
 
       </section>
@@ -491,13 +424,12 @@
           <li><a href="#history" onclick="navigateToView('history')" data-i18n="nav_heritage">Ancestor Heritage</a></li>
           <li><a href="#generation" onclick="navigateToView('generation')" data-i18n="nav_matcher">Zibei Matcher</a></li>
           <li><a href="#join" onclick="navigateToView('join')" data-i18n="nav_join">Membership Form</a></li>
-          <li><a href="#database" onclick="navigateToView('database')" data-i18n="nav_directory">Global Directory</a></li>
         </ul>
       </div>
       <div class="footer-links-col">
         <h4 data-i18n="footer_col_connect">Connect & Support</h4>
         <ul>
-          <li><a href="#database" onclick="navigateToView('database')" data-i18n="nav_directory">Find Family</a></li>
+          <li><a href="https://instagram.com/x.s.seow" target="_blank" data-i18n="footer_instagram">Instagram (@x.s.seow)</a></li>
           <li><a href="#" onclick="alert('Contact the world administration office at: admin@xiaoclan.org')" data-i18n="footer_admin">Admin Office</a></li>
           <li><a href="https://www.facebook.com/people/SIOWS-CLAN-GUILD-ASSOCIATION/100081564037252/" target="_blank" data-i18n="footer_facebook">Facebook Portal</a></li>
           <li><a href="#home" data-i18n="footer_back_top">Back to Top</a></li>
@@ -509,6 +441,45 @@
       <p style="font-size: 0.8rem; color: var(--gold-primary);" data-i18n="footer_motto">绳其祖武 · 奕代昌荣</p>
     </div>
   </footer>
+
+  <!-- Floating FAQ Chatbot Widget -->
+  <div id="chatbotContainer" class="chatbot-container">
+    <!-- Chat Button -->
+    <button id="chatbotToggleBtn" class="chatbot-toggle-btn" onclick="toggleChatbot()" aria-label="Open Chatbot">
+      <span class="chat-icon">💬</span>
+      <span class="chat-badge" id="chatNotificationBadge">1</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chatbotWindow" class="chatbot-window" style="display: none;">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <span class="chatbot-avatar">🦁</span>
+          <div>
+            <h4 class="chatbot-name" data-i18n="bot_title">Xiao Clan Assistant</h4>
+            <span class="chatbot-status" data-i18n="bot_status">Online (Automated)</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" onclick="toggleChatbot()" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Messages Pane -->
+      <div id="chatbotMessages" class="chatbot-messages">
+        <!-- Welcoming message populated by JS -->
+      </div>
+
+      <!-- Quick Replies Pane -->
+      <div id="chatbotQuickReplies" class="chatbot-quick-replies">
+        <!-- Suggestion pills populated by JS -->
+      </div>
+
+      <!-- Form input for manual message -->
+      <form id="chatbotInputForm" class="chatbot-input-form" onsubmit="handleChatSubmit(event)">
+        <input type="text" id="chatbotInputText" placeholder="Type a message..." data-i18n="bot_input_placeholder">
+        <button type="submit" class="chatbot-send-btn">➔</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Include App Logic -->
   <script src="app.js"></script>
