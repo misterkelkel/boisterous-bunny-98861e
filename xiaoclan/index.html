@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Xiao Clan Global Association | 萧氏宗亲会</title>
+  <meta name="description" content="Official Global Association for the Xiao Clan. Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Connect with family members across Singapore, Indonesia, China, and Europe. Join us today.">
+  <meta name="keywords" content="Xiao Clan, Siow Clan, Seow Clan, Xiao He, 萧何, 萧氏宗亲会, Zibei Matcher, 字辈, Chinese Genealogy">
+  <meta name="author" content="Xiao Clan Global Association">
+  
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xiaoclan.org/">
+  <meta property="og:title" content="Xiao Clan Global Association | 萧氏宗亲会">
+  <meta property="og:description" content="Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Join the registry and match your Zibei generation character.">
+  <meta property="og:image" content="https://xiaoclan.org/assets/chancellor_xiao_he.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://xiaoclan.org/">
+  <meta property="twitter:title" content="Xiao Clan Global Association | 萧氏宗亲会">
+  <meta property="twitter:description" content="Celebrating our lineage from Western Han Chancellor Xiao He (萧何). Join the registry and match your Zibei generation character.">
+  <meta property="twitter:image" content="https://xiaoclan.org/assets/chancellor_xiao_he.png">
+
+  <!-- Google Search Console Verification Placeholder -->
+  <!-- Replace content with your verification code from Google Search Console -->
+  <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE">
+
+  <!-- Google Analytics 4 (gtag.js) Placeholder -->
+  <!-- To enable, replace G-XXXXXXXXXX with your Google Analytics Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- JSON-LD Structured Data Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Xiao Clan Global Association",
+    "alternateName": "萧氏宗亲会",
+    "url": "https://xiaoclan.org/",
+    "logo": "https://xiaoclan.org/assets/chancellor_xiao_he.png",
+    "description": "The official global association dedicated to connecting and preserving the lineage and heritage of the Xiao Clan, descending from Chancellor Xiao He.",
+    "sameAs": [
+      "https://www.facebook.com/people/SIOWS-CLAN-GUILD-ASSOCIATION/100081564037252/"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Light Elements & Calligraphic Watermark -->
+  <div class="bg-ambient">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+  </div>
+  <div class="bg-calligraphy-watermark" aria-hidden="true">萧</div>
+
+  <!-- Header Navigation -->
+  <header class="app-header">
+    <a href="#home" class="logo-container" id="logoLink">
+      <div class="logo-seal">萧</div>
+      <div class="logo-text">
+        <span class="logo-title-en">Xiao Clan Global</span>
+        <span class="logo-title-zh" data-i18n="logo_sub">Global Xiao Clan Association</span>
+      </div>
+    </a>
+    <nav class="main-nav" id="navLinks">
+      <a href="#home" class="active" data-target="home" data-i18n="nav_home">Home</a>
+      <a href="#history" data-target="history" data-i18n="nav_heritage">Xiao He Heritage</a>
+      <a href="#generation" data-target="generation" data-i18n="nav_matcher">Zibei Matcher</a>
+      <a href="#join" data-target="join" data-i18n="nav_join">Join Clan</a>
+    </nav>
+  </header>
+
+  <!-- Main Views Container -->
+  <main id="viewContainer">
+
+    <!-- HOME / HERO VIEW -->
+    <div class="view-pane active" id="view-home">
+      <section class="hero-section">
+        <div class="hero-seal-large" aria-hidden="true">萧</div>
+        <h1 class="hero-title" data-i18n="hero_title">ONE CLAN, ONE FAMILY</h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">世界萧氏 · 绳其祖武</p>
+        <p class="hero-desc" data-i18n="hero_desc">
+          Tracing our roots back over 2,200 years to Western Han Prime Minister <strong>Xiao He (萧何)</strong>. From Singapore to Indonesia, China to Europe, we are bound by blood, history, and a shared future.
+        </p>
+        <div class="cta-group">
+          <button class="btn-primary" onclick="navigateToView('join')" data-i18n="btn_join_clan">Join the Clan</button>
+          <button class="btn-secondary" onclick="navigateToView('history')" data-i18n="btn_explore_heritage">Explore Heritage</button>
+        </div>
+      </section>
+
+      <!-- Short Intro Cards -->
+      <section class="container" style="padding-top: 0;">
+        <div class="heritage-hero-wrapper">
+          <div class="glass-card">
+            <h2 class="section-title-en" style="font-size: 1.6rem; text-align: left; margin-bottom: 1rem;" data-i18n="promo_title">Global Connection</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="promo_desc">
+              Connecting thousands of Xiao family members across international borders. Bridge cultural distances from South-East Asia to the Western Hemisphere and form real familial bonds.
+            </p>
+            <button class="btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;" onclick="navigateToView('join')" data-i18n="btn_join_clan">Join the Clan</button>
+          </div>
+          <div class="heritage-art-frame">
+            <div class="heritage-image-mock" id="heritageMockImage" style="background-image: url('assets/chancellor_xiao_he.png');">
+              <div class="heritage-image-overlay"></div>
+              <h3 class="heritage-art-title" data-i18n="promo_art_title">Chancellor Xiao He (萧何)</h3>
+              <p class="heritage-art-subtitle" data-i18n="promo_art_sub">Founding Ancestor of the Xiao Lineage</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HERITAGE / TIMELINE VIEW -->
+    <div class="view-pane" id="view-history" style="display: none;">
+      <section class="container">
+        <div class="section-header">
+          <h1 class="section-title-en" data-i18n="heritage_title">The Legacy of Xiao He</h1>
+          <p class="section-title-zh" data-i18n="heritage_sub">First Chancellor of Han Dynasty · Chief Architect</p>
+          <div class="section-divider"></div>
+        </div>
+
+        <div style="text-align: right; margin-bottom: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+          <a href="https://en.wikipedia.org/wiki/Xiao_He" target="_blank" style="color: var(--gold-primary); text-decoration: none; font-size: 0.85rem; border-bottom: 1px dashed var(--gold-primary);" data-i18n="heritage_wiki_source">Source: Wikipedia (维基百科)</a>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto 4rem auto; text-align: center; color: var(--text-secondary);">
+          <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;" data-i18n="heritage_intro_1">
+            <strong>Xiao He (萧何, 257 BC – 193 BC)</strong> was a prominent Chinese politician of the early Western Han dynasty, lauded as one of the 'Three Heroes of the early Han dynasty' alongside Han Xin and Zhang Liang.
+          </p>
+          <p data-i18n="heritage_intro_2">
+            Revered as the ultimate forefather of the Xiao Clan, his stewardship of the Guanzhong region, logistical mastery during the Chu-Han Contention, and codification of the imperial laws formed the bedrock of early Chinese civilization.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">257</div>
+            <div class="timeline-content glass-card">
+              <h3>Birth in Feng County (丰县)</h3>
+              <p>Xiao He is born in Feng County, Pei郡 (present-day Jiangsu). Serving as a Qin magistrate, he earns a renowned reputation for absolute administrative discipline, legislative wisdom, and social integrity.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">209</div>
+            <div class="timeline-content glass-card">
+              <h3>Pei County Rebellion</h3>
+              <p>Rebelling against Qin despotism, Xiao He joins Liu Bang's uprising. While Liu Bang leads armed troops, Xiao He coordinates local Peixian governance, providing strategic stability.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">206</div>
+            <div class="timeline-content glass-card">
+              <h3>Securing Xianyang Archives</h3>
+              <p>Entering the Qin capital, Xiao He prioritizes securing official registers, census books, maps, and legal codes over gold. This unparalleled repository of intelligence facilitates Liu Bang's conquest of China.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">206 – 202</div>
+            <div class="timeline-content glass-card">
+              <h3>Guanzhong Logistic Feat</h3>
+              <p>During the intense Chu-Han Contention against Xiang Yu, Xiao He administers Guanzhong homeland. He builds taxation systems and ensures continuous provisions of grain and reinforcement soldiers to the front lines, leading to total victory.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">200</div>
+            <div class="timeline-content glass-card">
+              <h3>Codification of the Han Laws</h3>
+              <p>Xiao He masterminds the <em>Jiuzhang Lu</em> (Code of Nine Chapters), establishing the constitutional and administrative template for Chinese imperial rule. He also oversees the iconic Weiyang Palace construction.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-badge"></div>
+            <div class="timeline-year">193</div>
+            <div class="timeline-content glass-card">
+              <h3>Passing & Imperial Deification</h3>
+              <p>Upon his death, he is named Marquis Wen (文侯) by the emperor. His descendants proliferate across centuries, cementing the family name across the world as defenders of wisdom and administrative excellence.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- GENERATION / ZIBEI MATCHER VIEW -->
+    <div class="view-pane" id="view-generation" style="display: none;">
+      <section class="container">
+        <div class="section-header">
+          <h1 class="section-title-en" data-i18n="matcher_title">Generational Zibei Matcher</h1>
+          <p class="section-title-zh" data-i18n="matcher_sub">Generational Poem Search & Matcher</p>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="generation-matcher-grid">
+          <div class="matcher-panel glass-card">
+            <h2 class="poem-title" style="text-align: left; font-size: 1.4rem;" data-i18n="matcher_results_title">Discover Your Lineage Place</h2>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;" data-i18n="matcher_desc">
+              Traditional Chinese families use a **Generation Poem (字辈 - Zibei)**, where each generation shares a specific character in their name. Enter your generational character to see your place in the Xiao lineage tree.
+            </p>
+
+            <div class="form-group">
+              <label for="dialectSelect" data-i18n="matcher_select_branch">Select Clan Branch / Poem Origin</label>
+              <select id="dialectSelect" onchange="updatePoemDisplay()">
+                <option value="fujian">Fujian Minnan Branch (福建闽南萧氏字辈)</option>
+                <option value="guangdong">Guangdong Hakka Branch (广东客家萧氏字辈)</option>
+                <option value="jiangxi">Jiangxi Luling Branch (江西庐陵古文字辈)</option>
+                <option value="hunan">Hunan Changsha Branch (湖南长沙萧氏字辈)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="zibeiCharInput" data-i18n="matcher_enter_char">Enter Your Generational Character (Chinese Character)</label>
+              <input type="text" id="zibeiCharInput" placeholder="e.g., 德, 泽, 传, 家, 世, 昌" maxlength="2" oninput="matchZibei()">
+            </div>
+
+            <div class="matcher-poem-box">
+              <h3 class="poem-title" id="poemTitleText">Fujian Minnan Generation Poem</h3>
+              <div class="poem-lines" id="poemBodyText">
+                <!-- Dynamically updated poem lines -->
+              </div>
+            </div>
+          </div>
+
+          <div class="result-card" id="zibeiResultBox">
+            <!-- Dynamically updated result details -->
+            <div class="result-empty">
+              <p style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--gold-primary);">🧬</p>
+              <p data-i18n="matcher_empty_desc">Select your branch and enter your name's middle character (generational character) to see your generational hierarchy.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- JOIN CLAN VIEW -->
+    <div class="view-pane" id="view-join" style="display: none;">
+      <section class="container">
+        <div class="section-header">
+          <h1 class="section-title-en" data-i18n="join_title">Join the Xiao Clan</h1>
+          <p class="section-title-zh" data-i18n="join_sub">One Clan Under Heaven · Sharing Our Glory</p>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="wizard-container">
+          <form id="membershipForm" class="glass-card" onsubmit="handleRegistration(event)">
+            <!-- Web3Forms Config -->
+            <input type="hidden" name="access_key" id="web3formsAccessKey" value="b0d1582e-dae1-427d-afbb-69a0c18c1b1a">
+            <input type="hidden" name="subject" value="New Xiao Clan Registry Submission">
+            <input type="hidden" name="from_name" value="Xiao Clan Global Portal">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputEnglishName" data-i18n="lbl_eng_name">Full Name (English) *</label>
+                <input type="text" id="inputEnglishName" name="name" placeholder="e.g., Alexander Xiao" required>
+              </div>
+              <div class="form-group">
+                <label for="inputChineseName" data-i18n="lbl_zh_name">Chinese Name (Optional)</label>
+                <input type="text" id="inputChineseName" name="chinese_name" placeholder="e.g., 萧国祥">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputEmail" data-i18n="lbl_email">Email Address *</label>
+                <input type="email" id="inputEmail" name="email" placeholder="e.g., alexander@xiaoclan.org" required>
+              </div>
+              <div class="form-group">
+                <label for="inputSurnameRomanization" data-i18n="lbl_romanization">Surname Romanization *</label>
+                <select id="inputSurnameRomanization" name="surname_romanization" required>
+                  <option value="Xiao">Xiao (Hanyu Pinyin)</option>
+                  <option value="Siow">Siow / Siew (Hakka/Cantonese)</option>
+                  <option value="Seow">Seow (Teochew/Hokkien)</option>
+                  <option value="Shiau">Shiau (Taiwanese Romanized)</option>
+                  <option value="Sieu">Sieu (Southeast Asian)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputCountry" data-i18n="lbl_country">Current Country / Region *</label>
+                <select id="inputCountry" name="country" required>
+                  <option value="" data-i18n="placeholder_select_country">Select country...</option>
+                  <option value="Singapore">Singapore</option>
+                  <option value="Indonesia">Indonesia</option>
+                  <option value="China">China</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="Europe">Europe</option>
+                  <option value="United States">United States</option>
+                  <option value="Australia">Australia</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputAncestralOrigin" data-i18n="lbl_ancestral">Ancestral Origin Village (Ancestral Hall)</label>
+                <input type="text" id="inputAncestralOrigin" name="ancestral_origin" placeholder="e.g., Luling, Jiangxi / Anxi, Fujian">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputZibeiChar" data-i18n="lbl_zibei_char">Generational Character (If known)</label>
+                <input type="text" id="inputZibeiChar" name="zibei_character" placeholder="e.g., 德 / 泽 / 国" maxlength="2">
+              </div>
+              <div class="form-group">
+                <label for="inputGenerationNum" data-i18n="lbl_gen_num">Generation Number (If known)</label>
+                <input type="number" id="inputGenerationNum" name="generation_number" placeholder="e.g., 75" min="1">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label for="inputPhone" data-i18n="lbl_phone">Contact Phone Number * (Include Country Code)</label>
+                <input type="tel" id="inputPhone" name="phone" placeholder="e.g., +65 9123 4567" required>
+              </div>
+              <div class="form-group">
+                <label for="inputMessenger" data-i18n="lbl_messenger">Preferred Messenger / ID</label>
+                <input type="text" id="inputMessenger" name="messenger_id" placeholder="e.g., WeChat ID: alex_xiao / WhatsApp">
+              </div>
+            </div>
+
+            <!-- THE CLAN OATH -->
+            <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--gold-dark); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; font-family: var(--font-serif-zh); line-height: 2.2; letter-spacing: 2px; color: var(--text-secondary); text-align: center;">
+              <h3 style="color: var(--gold-primary); font-size: 1.4rem; margin-bottom: 1.5rem;" data-i18n="oath_title">萧氏宗盟誓约</h3>
+              <p data-i18n="oath_p1">余虽身处五洲万国，血脉之系终归一源。</p>
+              <p data-i18n="oath_p2">敬拜先祖，上昭汉相萧何功烈，慎终追远。</p>
+              <p data-i18n="oath_p3">敦睦宗谊，守望相助，四海一家，同气连枝。</p>
+              <p data-i18n="oath_p4">誓传祖德，绳其祖武，传灯不熄，奕代昌荣。</p>
+              <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gold-primary);" data-i18n="oath_translate">I pledge to honor my ancestors, foster sibling brotherhood across all borders, and support family connection with compassion and integrity.</p>
+            </div>
+
+            <div class="form-group" style="flex-direction: row; gap: 0.8rem; align-items: flex-start; text-align: left; margin-bottom: 2rem;">
+              <input type="checkbox" id="inputAgreeOath" required style="width: auto; margin-top: 0.3rem;">
+              <label for="inputAgreeOath" style="color: var(--text-primary); cursor: pointer;" data-i18n="lbl_agree_oath">I solemnly sign this Clan Oath and request formal inclusion in the Xiao Clan Registry.</label>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btnSubmitForm" style="width: 100%; display: block;" data-i18n="btn_submit">Submit Registry</button>
+          </form>
+        </div>
+
+        <!-- SCROLL DOWNLOAD SECTION -->
+        <div id="scrollSuccessSection" style="display: none; margin-top: 4rem; text-align: center; animation: fadeIn 0.8s ease-out;">
+          <h2 class="section-title-en" style="color: var(--gold-primary);" data-i18n="scroll_welcome">Welcome to the Clan, Brother!</h2>
+          <p class="section-title-zh" data-i18n="scroll_subtitle">Officially Listed in the Genus Genealogy</p>
+          <p style="color: var(--text-secondary); max-width: 600px; margin: 1rem auto 2rem auto;" data-i18n="scroll_promo_desc">
+            Your registration is authenticated. We have generated your official, unique **Digital Membership Scroll** matching traditional Han Dynasty styles.
+          </p>
+
+          <!-- Interactive Scroll display -->
+          <div class="scroll-viewport">
+            <div class="scroll-container" id="clanScrollCertificate">
+              <div class="scroll-wood-roller-top"></div>
+              
+              <div class="scroll-content">
+                <div class="scroll-crest" data-i18n="scroll_crest_txt">蕭</div>
+                <h1 class="scroll-header-zh" data-i18n="scroll_title_zh">世界萧氏宗亲联谊谱</h1>
+                <p class="scroll-header-en" data-i18n="scroll_title_en">Xiao Clan Global Membership Scroll</p>
+                
+                <div class="scroll-body" id="scrollDescBody">
+                  兹证明宗亲 <strong id="scrollZhName">萧国祥</strong> 
+                  原籍福建闽南，为萧何公后裔。今于天天下萧全球联谊会，正式列谱。
+                  秉承祖训，光耀宗门。特此颁发此卷，永昭宗谊。
+                </div>
+                
+                <div class="scroll-footer">
+                  <div class="scroll-meta">
+                    <span id="scrollMemberId">NO. SC-075-883492</span>
+                    <span id="scrollDate">DATE: May 31, 2026</span>
+                    <span style="font-size: 0.75rem; color: #8b0000; font-weight: bold; margin-top: 0.5rem; display: block;">📍 GLOBAL REGISTRY</span>
+                  </div>
+                  <div class="scroll-seal-wax">萧氏<br>印信</div>
+                </div>
+              </div>
+
+              <div class="scroll-wood-roller-bottom"></div>
+            </div>
+          </div>
+
+          <div class="cta-group" style="margin-top: 2rem;">
+            <button class="btn-primary" onclick="downloadCertificate()" data-i18n="btn_download_scroll">Download Digital Scroll</button>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Interactive Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="#home" class="logo-container" style="margin-bottom: 1rem;">
+          <div class="logo-seal">萧</div>
+          <div class="logo-text">
+            <span class="logo-title-en">Xiao Clan Global</span>
+            <span class="logo-title-zh" data-i18n="logo_sub">Global Xiao Clan Association</span>
+          </div>
+        </a>
+        <p data-i18n="footer_desc">Preserving ancestral honor, uniting world lineages, and modernizing our clan heritage for the generations yet to be born.</p>
+      </div>
+      <div class="footer-links-col">
+        <h4 data-i18n="footer_col_nav">Navigation</h4>
+        <ul>
+          <li><a href="#home" onclick="navigateToView('home')" data-i18n="nav_home">Home Hub</a></li>
+          <li><a href="#history" onclick="navigateToView('history')" data-i18n="nav_heritage">Ancestor Heritage</a></li>
+          <li><a href="#generation" onclick="navigateToView('generation')" data-i18n="nav_matcher">Zibei Matcher</a></li>
+          <li><a href="#join" onclick="navigateToView('join')" data-i18n="nav_join">Membership Form</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4 data-i18n="footer_col_connect">Connect & Support</h4>
+        <ul>
+          <li><a href="https://instagram.com/x.s.seow" target="_blank" data-i18n="footer_instagram">Instagram (@x.s.seow)</a></li>
+          <li><a href="#" onclick="alert('Contact the world administration office at: admin@xiaoclan.org')" data-i18n="footer_admin">Admin Office</a></li>
+          <li><a href="https://www.facebook.com/people/SIOWS-CLAN-GUILD-ASSOCIATION/100081564037252/" target="_blank" data-i18n="footer_facebook">Facebook Portal</a></li>
+          <li><a href="#home" data-i18n="footer_back_top">Back to Top</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright" data-i18n="footer_copyright">© 2026 World Xiao Clan Guild Association. Traced back to 257 BC. All rights reserved.</p>
+      <p style="font-size: 0.8rem; color: var(--gold-primary);" data-i18n="footer_motto">绳其祖武 · 奕代昌荣</p>
+    </div>
+  </footer>
+
+  <!-- Floating FAQ Chatbot Widget -->
+  <div id="chatbotContainer" class="chatbot-container">
+    <!-- Chat Button -->
+    <button id="chatbotToggleBtn" class="chatbot-toggle-btn" onclick="toggleChatbot()" aria-label="Open Chatbot">
+      <span class="chat-icon">💬</span>
+      <span class="chat-badge" id="chatNotificationBadge">1</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chatbotWindow" class="chatbot-window" style="display: none;">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <span class="chatbot-avatar">🦁</span>
+          <div>
+            <h4 class="chatbot-name" data-i18n="bot_title">Xiao Clan Assistant</h4>
+            <span class="chatbot-status" data-i18n="bot_status">Online (Automated)</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" onclick="toggleChatbot()" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Messages Pane -->
+      <div id="chatbotMessages" class="chatbot-messages">
+        <!-- Welcoming message populated by JS -->
+      </div>
+
+      <!-- Quick Replies Pane -->
+      <div id="chatbotQuickReplies" class="chatbot-quick-replies">
+        <!-- Suggestion pills populated by JS -->
+      </div>
+
+      <!-- Form input for manual message -->
+      <form id="chatbotInputForm" class="chatbot-input-form" onsubmit="handleChatSubmit(event)">
+        <input type="text" id="chatbotInputText" placeholder="Type a message..." data-i18n="bot_input_placeholder">
+        <button type="submit" class="chatbot-send-btn">➔</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Include App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
